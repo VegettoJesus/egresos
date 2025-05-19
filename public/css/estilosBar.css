@@ -1,0 +1,212 @@
+@font-face {
+    font-family: 'letraGlobal';
+    src: url('../fonts/Poppins-Light.ttf');
+}
+:root{
+    --background-color: #5B92D9;
+    --text-title-color: #ffffff;
+    --text-color: #ffffff;
+    --icon-color:#ffffff;
+    --icon-color-selected:#355CC0;
+    --icon-menu-color:#707780;
+    --menu-color:#ffffff;
+
+    --text-selected-color: #355CC0;
+    --background-selected: #EBF0FF;
+    --background-hover: #F7F9FA;
+    --text-table-color: #336699;
+    --border-color:#5B92D9;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'letraGlobal';
+}
+body{
+    width: 100%;
+    height: 100vh;
+}
+header{
+    z-index: 200;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.45rem 2rem 0.45rem 1.27rem;
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    background-color: var(--background-color);
+    top: 0;
+    left: 0;
+}
+.left{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+}
+.menu-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.menu{
+    width: 1.5rem;
+    height: 37%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.menu div{
+    width: 100%;
+    height: 0.15rem;
+    background-color: var(--menu-color);
+}
+.brand{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+}
+.brand .name{
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--text-title-color);
+}
+.brand .logo{
+    width: 1.7rem;
+}
+.right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.6rem;
+}
+.right p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: revert-layer;
+    color: var(--text-color);
+}
+.right img{
+    width: 1.5rem;
+    margin: 0.5rem;
+}
+.right .user{
+    width: 2.1rem;
+    border-radius: 50%;
+}
+/*SIDEBAR*/
+.sidebar{
+    margin-top: 4rem;
+    width: 4rem;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: 1.1rem 0;
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+    background-color: var(--background-color);
+    transition: width 0.5s ease;
+}
+.sidebar.menu-toggle{
+    width: 18.75rem;
+}
+.sidebar a{
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+    padding: 0.9rem 0.7rem;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    color: var(--text-color);
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.logout {
+    margin-top: auto;
+}
+.sidebar a i{
+    color: var(--icon-color);
+    margin-left: 3px;
+    font-size: large;
+}
+.sidebar a:hover{
+    background-color: var(--background-hover);
+}
+.sidebar a.selected{
+    color: var(--text-selected-color);
+    background-color: var(--background-selected);
+}
+.sidebar a.selected i{
+    color: var(--icon-color-selected);
+}
+.sidebar a:hover i{
+    color: var(--background-color);
+}
+.sidebar img{
+    width: 1.6rem;
+}
+/*main*/
+main{
+    margin-top: 4rem;
+    margin-left: 4rem;
+    padding: 2rem;
+    transition: padding-left 0.5s ease;
+}
+main.menu-toggle{
+    margin-left: 18.75rem;
+}
+.sidebar .iconoSidebar{
+    margin-left: 3px;
+    font-size: large;
+}
+.submenu {
+    display: none;
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+}
+.submenu a{
+    color: var(--icon-color-selected);
+}
+.submenu a i{
+    color: var(--icon-color-selected);
+}
+/*Responsive*/
+@media (max-width:600px){
+    .sidebar{
+        width: 0;
+        font-size: 12px;
+        margin-top: 40px;
+    }
+    main{
+        margin-left: 0;
+        font-size: 12px;
+    }
+    main.menu-toggle{
+        margin-left: 0;
+    }
+    #nameLogo{
+        font-size: 12px;
+    }
+    .right{
+        display: none;
+    }
+    .sidebar.menu-toggle{
+        width: 12.75rem;
+    }
+    .menu{
+        height: 60%;
+    }
+}
