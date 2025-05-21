@@ -317,11 +317,12 @@
 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Autorizado</label>
-                            <select id="autorizadoPay" name="autorizadoPay" class="form-control @error('autorizadoPay', 'formregistrarPay') is-invalid @enderror">
-                                @foreach ($autorizantes as $autorizadoP)
-                                    <option value="{{ $autorizadoP->CodEmpleado }}" {{ old('autorizadoPay') == $autorizadoP->CodEmpleado ? 'selected' : '' }}> {{ strtoupper($autorizadoP->Empleado) }} </option>
-                                @endforeach
-                            </select>                            
+                            <select id="autorizadoPay" name="autorizadoPay" class="form-control @error('autorizadoPay', 'formregistrarPay') is-invalid @enderror"> 
+                                @foreach ($autorizantes as $autorizadoP) 
+                                    <option value="{{ $autorizadoP->CodEmpleado }}" {{ old('autorizadoPay', '000106') == $autorizadoP->CodEmpleado ? 'selected' : '' }}> {{ strtoupper($autorizadoP->Empleado) }} 
+                                    </option> 
+                                @endforeach 
+                            </select>                           
                             @error('autorizadoPay', 'formregistrarPay')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -655,6 +656,7 @@
             $('#registrarOrServ').find('select').each(function () {
                 $(this).prop('selectedIndex', 0);
             });
+            $('#autorizanteR').val('000106');
         });
     });
     

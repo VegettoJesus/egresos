@@ -43,7 +43,7 @@
             background-color: #FFFFFF;
         }
         .nota-importante {
-            margin-top: 40px;
+            margin-top: 10px;
             font-size: 10pt;
             color: #000;
             text-align: left;

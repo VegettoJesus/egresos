@@ -2,6 +2,7 @@ $(document).ready(function(){
     $("#buscarAccesos").click(function () {
         mostrarData();
     });
+    mostrarData();
 });
 
 function mostrarData() {
