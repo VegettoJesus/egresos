@@ -3,6 +3,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - EGRESOS</title>
+  <link rel="icon" href="{{ asset('img/logoCorp.ico') }}" type="image/x-icon">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <link rel="stylesheet" href="{{ asset('css/login.css') }}">
