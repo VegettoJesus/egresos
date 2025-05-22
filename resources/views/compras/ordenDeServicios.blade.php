@@ -26,7 +26,7 @@
 
                             <div class="col-lg-3 col-md-12 col-sm-12 pt-3">
                                 <label class="form-label">Empresa:</label>
-                                <select id="codemp" name="codemp" class="form-control">
+                                <select id="codemp" name="codemp" class="form-select">
                                     <option value="0">TODOS</option>
                                     @foreach ($empresa as $empresa2)
                                         <option value="{{ $empresa2->codigo }}"> {{ $empresa2->Nombre }} </option>
@@ -37,7 +37,7 @@
 
                             <div class="col-lg-3 col-md-12 col-sm-12 pt-3">
                                 <label class="form-label">Sede:</label>
-                                <select id="sede" name="sede" class="form-control" required>
+                                <select id="sede" name="sede" class="form-select" required>
                                     @foreach ($sedes as $sede)
                                         @if ($sede->ID == '00' && strtoupper(trim($sede->Nombre)) == 'NINGUNO')
                                             <option value="0">TODOS</option>
@@ -50,7 +50,7 @@
 
                             <div class="col-lg-3 col-md-12 col-sm-12 pt-3">
                                 <label class="form-label">Pagos:</label>
-                                <select id="pagos" name="pagos" class="form-control">
+                                <select id="pagos" name="pagos" class="form-select">
                                     <option value="0">TODOS</option>
                                     <option value="1">A PAGAR</option>
                                 </select>
@@ -69,15 +69,16 @@
                                     </button>
                                 </div>
                             </div>
-
-                            <div class="col-lg-2 col-md-12 col-sm-12 pt-4 mt-3">
-                                <div class="position-relative pt-2">
-                                    <button class="btn btn-primary w-100 text-center position-relative" title="Nuevo" id="btnNuevo" data-bs-toggle="modal" data-bs-target="#registrarOrdenServicio" type="button">
-                                        <i class="bi bi-plus-lg position-absolute start-0 top-50 translate-middle-y ms-3"></i>
-                                        Nuevo
-                                    </button>
+                            @if ($permiso_nuevo)
+                                <div class="col-lg-2 col-md-12 col-sm-12 pt-4 mt-3">
+                                    <div class="position-relative pt-2">
+                                        <button class="btn btn-primary w-100 text-center position-relative" title="Nuevo" id="btnNuevo" data-bs-toggle="modal" data-bs-target="#registrarOrdenServicio" type="button">
+                                            <i class="bi bi-plus-lg position-absolute start-0 top-50 translate-middle-y ms-3"></i>
+                                            Nuevo
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </form>
                 </div>
@@ -285,7 +286,7 @@
                 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Tipo</label>
-                            <select id="tipoPay" name="tipoPay" class="form-control @error('tipoPay', 'formregistrarPay') is-invalid @enderror">
+                            <select id="tipoPay" name="tipoPay" class="form-select @error('tipoPay', 'formregistrarPay') is-invalid @enderror">
                                 @foreach ($tipoPago as $tipoPagos)
                                     <option value="{{ $tipoPagos->id }}" {{ old('tipoPay') == $tipoPagos->id ? 'selected' : '' }}> {{ strtoupper($tipoPagos->Nombre) }} </option>
                                 @endforeach
@@ -297,7 +298,7 @@
 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Banco</label>
-                            <select id="bancoPay" name="bancoPay" class="form-control @error('bancoPay', 'formregistrarPay') is-invalid @enderror">
+                            <select id="bancoPay" name="bancoPay" class="form-select @error('bancoPay', 'formregistrarPay') is-invalid @enderror">
                                 @foreach ($banco as $banco)
                                     <option value="{{ $banco->id }}" {{ old('bancoPay') == $banco->id ? 'selected' : '' }}> {{ strtoupper($banco->Nombre) }} </option>
                                 @endforeach
@@ -317,7 +318,7 @@
 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Autorizado</label>
-                            <select id="autorizadoPay" name="autorizadoPay" class="form-control @error('autorizadoPay', 'formregistrarPay') is-invalid @enderror"> 
+                            <select id="autorizadoPay" name="autorizadoPay" class="form-select @error('autorizadoPay', 'formregistrarPay') is-invalid @enderror"> 
                                 @foreach ($autorizantes as $autorizadoP) 
                                     <option value="{{ $autorizadoP->CodEmpleado }}" {{ old('autorizadoPay', '000106') == $autorizadoP->CodEmpleado ? 'selected' : '' }}> {{ strtoupper($autorizadoP->Empleado) }} 
                                     </option> 
@@ -338,7 +339,7 @@
 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Moneda</label>
-                            <select id="monedaPay" name="monedaPay" class="form-control @error('monedaPay', 'formregistrarPay') is-invalid @enderror">
+                            <select id="monedaPay" name="monedaPay" class="form-select @error('monedaPay', 'formregistrarPay') is-invalid @enderror">
                                 <option value="1" {{ old('monedaR', '1') == '1' ? 'selected' : '' }}>SOLES</option>
                                 <option value="2" {{ old('monedaR', '1') == '2' ? 'selected' : '' }}>DOLARES</option>
                             </select>
@@ -446,7 +447,7 @@
                 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Empresa</label>
-                            <select id="empresaR" name="empresaR" class="form-control @error('empresaR', 'registrarOrServ') is-invalid @enderror">
+                            <select id="empresaR" name="empresaR" class="form-select @error('empresaR', 'registrarOrServ') is-invalid @enderror">
                                 @foreach ($empresa as $empresa)
                                     <option value="{{ $empresa->codigo }}" {{ old('empresaR') == $empresa->codigo ? 'selected' : '' }}> {{ $empresa->Nombre }} </option>
                                 @endforeach
@@ -466,7 +467,7 @@
                 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Solicitado</label>
-                            <select id="solicitanteR" name="solicitanteR" class="form-control @error('solicitanteR', 'registrarOrServ') is-invalid @enderror">
+                            <select id="solicitanteR" name="solicitanteR" class="form-select @error('solicitanteR', 'registrarOrServ') is-invalid @enderror">
                                 @foreach ($solicitantes as $solicitantes)
                                     <option value="{{ $solicitantes->CodEmpleado }}" {{ old('solicitanteR') == $solicitantes->CodEmpleado ? 'selected' : '' }}> {{ $solicitantes->Empleado }} </option>
                                 @endforeach
@@ -478,7 +479,7 @@
                 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Autorizado</label>
-                            <select id="autorizanteR" name="autorizanteR" class="form-control @error('autorizanteR', 'registrarOrServ') is-invalid @enderror">
+                            <select id="autorizanteR" name="autorizanteR" class="form-select @error('autorizanteR', 'registrarOrServ') is-invalid @enderror">
                                 @foreach ($autorizantes as $autorizantesR)
                                     <option value="{{ $autorizantesR->CodEmpleado }}" {{ old('autorizanteR') == $autorizantesR->CodEmpleado ? 'selected' : '' }}> {{ $autorizantesR->Empleado }} </option>
                                 @endforeach
@@ -490,7 +491,7 @@
                 
                         <div class="col-lg-4 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Forma Pago</label>
-                            <select id="formaPagoR" name="formaPagoR" class="form-control @error('formaPagoR', 'registrarOrServ') is-invalid @enderror">
+                            <select id="formaPagoR" name="formaPagoR" class="form-select @error('formaPagoR', 'registrarOrServ') is-invalid @enderror">
                                 @foreach ($formaPago as $formaPago)
                                     <option value="{{ $formaPago->IDFP }}" {{ old('formaPagoR') == $formaPago->IDFP ? 'selected' : '' }}> {{ strtoupper($formaPago->Nombre) }} </option>
                                 @endforeach
@@ -510,7 +511,7 @@
                 
                         <div class="col-lg-4 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Moneda</label>
-                            <select id="monedaR" name="monedaR" class="form-control @error('monedaR', 'registrarOrServ') is-invalid @enderror">
+                            <select id="monedaR" name="monedaR" class="form-select @error('monedaR', 'registrarOrServ') is-invalid @enderror">
                                 <option value="1" {{ old('monedaR', '1') == '1' ? 'selected' : '' }}>SOLES</option>
                                 <option value="2" {{ old('monedaR', '1') == '2' ? 'selected' : '' }}>DOLARES</option>
                             </select>
@@ -521,7 +522,7 @@
                 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Local</label>
-                            <select id="sedeR" name="sedeR" class="form-control @error('sedeR', 'registrarOrServ') is-invalid @enderror" data-old="{{ old('sedeR') }}">
+                            <select id="sedeR" name="sedeR" class="form-select @error('sedeR', 'registrarOrServ') is-invalid @enderror" data-old="{{ old('sedeR') }}">
                             </select>
                             @error('sedeR', 'registrarOrServ')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -531,7 +532,7 @@
                 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Tipo Bien</label>
-                            <select id="tipoBienR" name="tipoBienR" class="form-control @error('tipoBienR', 'registrarOrServ') is-invalid @enderror">
+                            <select id="tipoBienR" name="tipoBienR" class="form-select @error('tipoBienR', 'registrarOrServ') is-invalid @enderror">
                                 <option value="1" {{ old('tipoBienR', '1') == '1' ? 'selected' : '' }}>SERVICIO</option>
                                 <option value="2" {{ old('tipoBienR', '1') == '2' ? 'selected' : '' }}>PRODUCTO</option>
                             </select>

@@ -256,15 +256,22 @@ function mostrarData() {
                 render: function (data) {
                     let botones = "";
                     if (parseFloat(data.Apagar) > 0) {
-                        botones += `
-                            <button class="btn btn-warning me-1" type="button" onclick="editar('${data.Op}');" title="Editar Acceso">
-                                <span class="bi bi-pencil-square"></span>
-                            </button>
-                            <button class="btn btn-success me-1" type="button"
-                                onclick="RegPago('${data.Op}', '${data.RazonSocial}', '${data.Transaccion}');" title="Registrar Pago">
-                                <span class="bi bi-cash-stack"></span>
-                            </button>
-                        `;
+                        if (permiso.modificar) {
+                            botones += `
+                                <button class="btn btn-warning me-1" type="button" onclick="editar('${data.Op}');" title="Editar Acceso">
+                                    <span class="bi bi-pencil-square"></span>
+                                </button>
+                            `;
+                        }
+                        if (permiso.nuevo) {
+                            botones += `
+                                <button class="btn btn-success me-1" type="button"
+                                    onclick="RegPago('${data.Op}', '${data.RazonSocial}', '${data.Transaccion}');" title="Registrar Pago">
+                                    <span class="bi bi-cash-stack"></span>
+                                </button>
+                            `;
+                        }
+                        
                     }
                     if (parseFloat(data.NroPagos) > 0) {
                         botones += `
@@ -273,11 +280,14 @@ function mostrarData() {
                             </button>
                         `;
                     }
-
+                    if (permiso.eliminar) {
+                        botones += `
+                            <button class="btn btn-danger me-1" type="button" onclick="eliminar('${data.Op}');" title="Eliminar Orden Servicio">
+                                <span class="bi bi-trash"></span>
+                            </button>
+                        `;
+                    }
                     botones += `
-                        <button class="btn btn-danger me-1" type="button" onclick="eliminar('${data.Op}');" title="Eliminar Orden Servicio">
-                            <span class="bi bi-trash"></span>
-                        </button>
                         <button class="btn btn-danger me-1" type="button" onclick="pdf('${data.Op}');" title="PDF">
                                 <span class="bi bi-file-earmark-pdf-fill"></span>
                         </button>

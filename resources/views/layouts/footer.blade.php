@@ -1,4 +1,12 @@
 <footer>
+    <script id="permisos-json" type="application/json">
+        {!! json_encode([
+            'nuevo' => ($permiso_nuevo[0]->Valor ?? null) === "1",
+            'modificar' => ($permiso_modificar[0]->Valor ?? null) === "1",
+            'eliminar' => ($permiso_eliminar[0]->Valor ?? null) === "1"
+        ]) !!}
+    </script>
+
     <script src="{{ asset('js/main.js') }}"></script>
     @isset($script)
         <script src="{{ asset($script) }}"></script>

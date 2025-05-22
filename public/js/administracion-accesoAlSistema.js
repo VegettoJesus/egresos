@@ -66,8 +66,19 @@ function mostrarData() {
             {
                 data: null,
                 render: function (data) {
-                    return "<button class=\"btn btn-danger\" type=\"button\" onclick=\"eliminar(" + data.ID + ");\" title=\"Eliminar Acceso\"><span class=\"bi bi-trash\"></span></button>";
+                let botones = '';
+
+                if (permiso.modificar) {
+                    botones += `<button class="btn btn-warning me-1" type="button" onclick="editar(${data.ID}, ${data.id_usuario});" title="Editar Acceso"><span class="bi bi-pencil-square"></span></button>`;
                 }
+
+                if (permiso.eliminar) {
+                    botones += `<button class="btn btn-danger" type="button" onclick="eliminar(${data.ID});" title="Eliminar Acceso"><span class="bi bi-trash"></span></button>`;
+                }
+
+                return botones;
+            }
+
             }
         ],
         language: {
@@ -90,3 +101,95 @@ function mostrarData() {
         }
     });
 }
+function eliminar(id) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: '¿Realmente deseas eliminar este acceso al sistema? Esta acción no se puede deshacer.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: 'accesoAlSistema',
+                type: 'POST',
+                data: { opcion: 'eliminar', id: id },
+                dataType: 'json',
+                success: function(response) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: 'El acceso ha sido eliminado correctamente.'
+                    });
+                    $('#tablaAccesos').DataTable().ajax.reload();
+                },
+                error: function() {
+                    Swal.fire(
+                        'Error',
+                        'Ocurrió un problema al eliminar el acceso.',
+                        'error'
+                    );
+                }
+            });
+        }
+    });
+}
+
+function editar(id_menu, id_usuario) {
+    $.ajax({
+        url: 'accesoAlSistema',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            opcion: 'ObtenerData',
+            id_menu: id_menu,
+            id_usuario: id_usuario
+        },
+        beforeSend: function () {
+            Swal.fire({
+                title: 'Cargando...',
+                html: '<div class="spinner-border text-primary" role="status"></div>',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+            });
+        },
+        success: function (response) {
+            Swal.close();
+            if (response.respuesta === 'success') {
+                const acceso = response.data[0];
+                console.log(acceso);
+
+                $('#usuario').val(acceso.id_usuario)
+                    .addClass('readonly-style')
+                    .prop('readonly', true);
+
+                $('#menuA').val(acceso.id_menu)
+                    .addClass('readonly-style')
+                    .prop('readonly', true);
+
+                $('#permiso_nuevo').prop('checked', acceso.Nuevo == 1);
+                $('#permiso_modificar').prop('checked', acceso.Modificar == 1);
+                $('#permiso_eliminar').prop('checked', acceso.Eliminar == 1);
+
+                $('#registrarAccesoSistema .modal-title').text('Editar Acceso');
+                $('#registrarAccesoSistema').modal('show');
+            } else {
+                Swal.fire('Error', 'No se pudo obtener la información del acceso.', 'error');
+            }
+        }
+    });
+}
+
