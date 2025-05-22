@@ -88,14 +88,24 @@ function mostrarData() {
             {
                 data: null,
                 render: function (data) {
-                    return `
-                        <button class="btn btn-warning me-1" type="button" onclick="editar(${data.Op});" title="Editar Acceso">
-                            <span class="bi bi-pencil-square"></span>
-                        </button>
-                        <button class="btn btn-danger" type="button" onclick="eliminar(${data.Op});" title="Eliminar Acceso">
-                            <span class="bi bi-trash"></span>
-                        </button>
-                    `;
+                    let botones = "";
+                    
+                    if (permiso.modificar) {
+                        botones += `
+                            <button class="btn btn-warning me-1" type="button" onclick="editar('${data.Op}');" title="Editar Acceso">
+                                <span class="bi bi-pencil-square"></span>
+                            </button>
+                        `;
+                    }
+                    if (permiso.eliminar) {
+                        botones += `
+                            <button class="btn btn-danger" type="button" onclick="eliminar('${data.Op}');" title="Eliminar Acceso">
+                                <span class="bi bi-trash"></span>
+                            </button>
+                        `;
+                    }
+
+                    return botones;
                 }
             }
         ],

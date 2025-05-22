@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-12 col-sm-12">
                                 <label class="form-label">T. Persona:</label>
-                                <select id="tipo_Persona" name="tipo_Persona" class="form-control" required>
+                                <select id="tipo_Persona" name="tipo_Persona" class="form-select" required>
                                     <option value="0">Todos</option>
                                     <option value="1">Persona Natural</option>
                                     <option value="2">Persona Juridica</option>
@@ -28,14 +28,16 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-12 col-sm-12 pt-4">
-                                <div class="position-relative pt-2">
-                                    <button class="btn btn-primary w-100 text-center position-relative" title="Nuevo" id="btnNuevo" data-bs-toggle="modal" data-bs-target="#registrarProveedor" type="button">
-                                        <i class="bi bi-plus-lg position-absolute start-0 top-50 translate-middle-y ms-3"></i>
-                                        Nuevo
-                                    </button>
+                            @if ($permiso_nuevo)
+                                <div class="col-lg-2 col-md-12 col-sm-12 pt-4">
+                                    <div class="position-relative pt-2">
+                                        <button class="btn btn-primary w-100 text-center position-relative" title="Nuevo" id="btnNuevo" data-bs-toggle="modal" data-bs-target="#registrarProveedor" type="button">
+                                            <i class="bi bi-plus-lg position-absolute start-0 top-50 translate-middle-y ms-3"></i>
+                                            Nuevo
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </form>
                 </div>
@@ -122,7 +124,7 @@
                         <input type="hidden" name="CodProv" id="CodProv" value="0" />
                         <div class="col-lg-4 col-md-12 col-sm-12 pt-2">
                             <label class="form-label">T. Persona:</label>
-                            <select id="tipo_PersonaR" name="tipo_PersonaR" class="form-control @error('tipo_PersonaR') is-invalid @enderror" value="{{ old('tipo_PersonaR') }}">
+                            <select id="tipo_PersonaR" name="tipo_PersonaR" class="form-select @error('tipo_PersonaR') is-invalid @enderror" value="{{ old('tipo_PersonaR') }}">
                                 <option value="1" {{ old('tipo_PersonaR') == 1 ? 'selected' : '' }}>Persona Natural</option>
                                 <option value="2" {{ old('tipo_PersonaR') == 2 ? 'selected' : '' }}>Persona Juridica</option>
                             </select>
@@ -150,7 +152,7 @@
 
                         <div class="col-lg-4 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Tipo Documento</label>
-                            <select id="tipoDocR" name="tipoDocR" class="form-control @error('tipoDocR') is-invalid @enderror">
+                            <select id="tipoDocR" name="tipoDocR" class="form-select @error('tipoDocR') is-invalid @enderror">
                                 <option value="0" {{ old('tipoDocR', '0') == '0' ? 'selected' : '' }}>Ninguno</option>
                                 <option value="1" {{ old('tipoDocR', '0') == '1' ? 'selected' : '' }}>DNI</option>
                                 <option value="2" {{ old('tipoDocR', '0') == '2' ? 'selected' : '' }}>Carnet de Extranjeria</option>
@@ -189,7 +191,7 @@
                         
                         <div class="col-lg-4 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Pais:</label>
-                            <select id="paisR" name="paisR" class="form-control @error('paisR') is-invalid @enderror" value="{{ old('paisR') }}">
+                            <select id="paisR" name="paisR" class="form-select @error('paisR') is-invalid @enderror" value="{{ old('paisR') }}">
                             </select>
                             @error('paisR')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -198,7 +200,7 @@
                         
                         <div class="col-lg-4 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Departamento:</label>
-                            <select id="departamentoR" name="departamentoR" class="form-control @error('departamentoR') is-invalid @enderror" value="{{ old('departamentoR') }}">
+                            <select id="departamentoR" name="departamentoR" class="form-select @error('departamentoR') is-invalid @enderror" value="{{ old('departamentoR') }}">
                             </select>
                             @error('departamentoR')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -207,7 +209,7 @@
                         
                         <div class="col-lg-4 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Provincia:</label>
-                            <select id="provinciaR" name="provinciaR" class="form-control @error('provinciaR') is-invalid @enderror" value="{{ old('provinciaR') }}">
+                            <select id="provinciaR" name="provinciaR" class="form-select @error('provinciaR') is-invalid @enderror" value="{{ old('provinciaR') }}">
                             </select>
                             @error('provinciaR')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -216,7 +218,7 @@
 
                         <div class="col-lg-4 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Distrito:</label>
-                            <select id="distritoR" name="distritoR" class="form-control @error('distritoR') is-invalid @enderror" value="{{ old('distritoR') }}">
+                            <select id="distritoR" name="distritoR" class="form-select @error('distritoR') is-invalid @enderror" value="{{ old('distritoR') }}">
                             </select>
                             @error('distritoR')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -266,7 +268,7 @@
 
                         <div class="col-lg-4 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Estado:</label>
-                            <select id="estadoR" name="estadoR" class="form-control @error('estadoR') is-invalid @enderror" value="{{ old('estadoR') }}">
+                            <select id="estadoR" name="estadoR" class="form-select @error('estadoR') is-invalid @enderror" value="{{ old('estadoR') }}">
                                 <option value="1" {{ old('estadoR') == 1 ? 'selected' : '' }}>Activo</option>
                                 <option value="0" {{ old('estadoR') == 1 ? 'selected' : '' }}>Inactivo</option>
                             </select>

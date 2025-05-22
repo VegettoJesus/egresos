@@ -1,3 +1,5 @@
+const permisosRaw = document.getElementById('permisos-json').textContent;
+const permiso = JSON.parse(permisosRaw);
 $(document).ready(function(){
     $.ajaxSetup({
         headers: {

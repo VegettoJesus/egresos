@@ -89,13 +89,23 @@ function mostrarData() {
                 data: null,
                 render: function (data) {
                     let botones = "";
+                    
+                    if (permiso.modificar) {
+                        botones += `
+                            <button class="btn btn-warning me-1" type="button" onclick="editar('${data.IDPago}');" title="Editar Pago">
+                                <span class="bi bi-pencil-square"></span>
+                            </button>
+                        `;
+                    }
+                    if (permiso.eliminar) {
+                        botones += `
+                            <button class="btn btn-danger me-1" type="button" onclick="eliminar('${data.IDPago}');" title="Eliminar Pago">
+                                <span class="bi bi-trash"></span>
+                            </button>
+                        `;
+                    }
+
                     botones += `
-                        <button class="btn btn-warning me-1" type="button" onclick="editar('${data.IDPago}');" title="Editar Pago">
-                            <span class="bi bi-pencil-square"></span>
-                        </button>
-                        <button class="btn btn-danger me-1" type="button" onclick="eliminar('${data.IDPago}');" title="Eliminar Pago">
-                            <span class="bi bi-trash"></span>
-                        </button>
                         <button class="btn btn-danger me-1" type="button" onclick="GenerarPdf('${data.IDPago}');" title="Generar PDF">
                                 <span class="bi bi-file-earmark-pdf-fill"></span>
                         </button>

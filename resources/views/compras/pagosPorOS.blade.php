@@ -26,7 +26,7 @@
 
                             <div class="col-lg-4 col-md-12 col-sm-12 pt-3">
                                 <label class="form-label">Sede:</label>
-                                <select id="sede" name="sede" class="form-control" required>
+                                <select id="sede" name="sede" class="form-select" required>
                                     @foreach ($sedes as $sede)
                                         @if ($sede->ID == '00' && strtoupper(trim($sede->Nombre)) == 'NINGUNO')
                                             <option value="00">TODOS</option>
@@ -186,7 +186,7 @@
                 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Tipo</label>
-                            <select id="tipoPay" name="tipoPay" class="form-control @error('tipoPay', 'formregistrarPay') is-invalid @enderror">
+                            <select id="tipoPay" name="tipoPay" class="form-select @error('tipoPay', 'formregistrarPay') is-invalid @enderror">
                                 @foreach ($tipoPago as $tipoPagos)
                                     <option value="{{ $tipoPagos->id }}" {{ old('tipoPay') == $tipoPagos->id ? 'selected' : '' }}> {{ strtoupper($tipoPagos->Nombre) }} </option>
                                 @endforeach
@@ -198,7 +198,7 @@
 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Banco</label>
-                            <select id="bancoPay" name="bancoPay" class="form-control @error('bancoPay', 'formregistrarPay') is-invalid @enderror">
+                            <select id="bancoPay" name="bancoPay" class="form-select @error('bancoPay', 'formregistrarPay') is-invalid @enderror">
                                 @foreach ($banco as $banco)
                                     <option value="{{ $banco->id }}" {{ old('bancoPay') == $banco->id ? 'selected' : '' }}> {{ strtoupper($banco->Nombre) }} </option>
                                 @endforeach
@@ -218,7 +218,7 @@
 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Autorizado</label>
-                            <select id="autorizadoPay" name="autorizadoPay" class="form-control @error('autorizadoPay', 'formregistrarPay') is-invalid @enderror">
+                            <select id="autorizadoPay" name="autorizadoPay" class="form-select @error('autorizadoPay', 'formregistrarPay') is-invalid @enderror">
                                 @foreach ($autorizantes as $autorizadoP)
                                     <option value="{{ $autorizadoP->CodEmpleado }}" {{ old('autorizadoPay') == $autorizadoP->CodEmpleado ? 'selected' : '' }}> {{ strtoupper($autorizadoP->Empleado) }} </option>
                                 @endforeach
@@ -238,7 +238,7 @@
 
                         <div class="col-lg-6 col-md-12 col-sm-12 pt-3">
                             <label class="form-label">Moneda</label>
-                            <select id="monedaPay" name="monedaPay" class="form-control @error('monedaPay', 'formregistrarPay') is-invalid @enderror">
+                            <select id="monedaPay" name="monedaPay" class="form-select @error('monedaPay', 'formregistrarPay') is-invalid @enderror">
                                 <option value="1" {{ old('monedaR', '1') == '1' ? 'selected' : '' }}>SOLES</option>
                                 <option value="2" {{ old('monedaR', '1') == '2' ? 'selected' : '' }}>DOLARES</option>
                             </select>
